@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>example</groupId>
+    <artifactId>rewrite-me</artifactId>
+    <version>${revision}${changelist}</version>
+  </parent>
+  <groupId>example</groupId>
+  <artifactId>sisu-5min-demo-child</artifactId>
+  <version>${revision}${changelist}</version>
+  <name>Sisu 5-minute demo child</name>
+  <dependencies>
+    <dependency>
+      <groupId>com.google.inject</groupId>
+      <artifactId>guice</artifactId>
+      <version>4.0</version>
+    </dependency>
+    <dependency>
+      <groupId>org.eclipse.sisu</groupId>
+      <artifactId>org.eclipse.sisu.inject</artifactId>
+      <version>0.3.5</version>
+    </dependency>
+    <dependency>
+      <groupId>log4j</groupId>
+      <artifactId>log4j</artifactId>
+      <version>${log4j}</version>
+    </dependency>
+  </dependencies>
+  <repositories>
+    <repository>
+      <id>thirdparty</id>
+      <name>Third-party Artefacts</name>
+      <url>${repo.thirdparty}</url>
+    </repository>
+  </repositories>
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.openrewrite.maven</groupId>
+        <artifactId>rewrite-maven-plugin</artifactId>
+        <version>4.20.0</version>
+        <configuration>
+          <activeRecipes>
+            <recipe>org.openrewrite.java.logging.slf4j.Log4jToSlf4j</recipe>
+          </activeRecipes>
+        </configuration>
+        <executions>
+          <execution>
+            <goals>
+              <goal>run</goal>
+            </goals>
+            <phase>validate</phase>
+          </execution>
+        </executions>
+        <dependencies>
+          <dependency>
+            <groupId>org.openrewrite.recipe</groupId>
+            <artifactId>rewrite-logging-frameworks</artifactId>
+            <version>1.3.0</version>
+          </dependency>
+        </dependencies>
+      </plugin>
+    </plugins>
+  </build>
+</project>
